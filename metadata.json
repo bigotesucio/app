@@ -1,5 +1,5 @@
 {
-  "name": "Catalogo Interactivo Apparell 04/09",
-  "description": "An interactive 2025 product catalog for Apparell, a custom apparel and merchandise brand. The app features a product showcase, an AI-powered collection idea generator, a price comparator, and detailed information on customization techniques and available colors.",
+  "name": "Guía de Vinilos Apparell",
+  "description": "Una guía interactiva y configurador para entender y presupuestar la fabricación de vinilos personalizados con Apparell.",
   "requestFramePermissions": []
 }
