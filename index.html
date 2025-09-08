@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guía de Vinilos Apparell™</title>
+    <title>Catálogo Interactivo Apparell™ 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,13 @@
           font-family: 'Inter', sans-serif;
           background-color: #ffffff;
           color: #111827;
+      }
+      .nav-carousel::-webkit-scrollbar {
+          display: none;
+      }
+      .nav-carousel {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
       }
       strong {
           font-weight: 600;
@@ -33,6 +40,129 @@
         opacity: 0; /* Start hidden */
         animation: fadeInUp 0.8s ease-out forwards;
       }
+
+      @media print {
+        @page {
+          size: A4 portrait;
+          margin: 20mm;
+        }
+
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        #root {
+          display: none !important;
+        }
+        
+        #printable-collection, #printable-quote {
+          display: block !important;
+        }
+        
+        .print-collection-cover {
+            height: 257mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            page-break-after: always;
+        }
+        
+        .print-collection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15mm;
+        }
+
+        .print-collection-card {
+            page-break-inside: avoid;
+            border: 1px solid #e5e7eb;
+            padding: 4mm;
+        }
+        
+        .print-collection-card-image-wrapper {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          margin-bottom: 3mm;
+        }
+
+        .print-collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .print-collection-logo-overlay {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 35%;
+          max-height: 35%;
+          object-fit: contain;
+        }
+
+        /* Quote Print Styles */
+        .print-quote-page {
+          height: 257mm;
+          display: flex;
+          flex-direction: column;
+          font-size: 10pt;
+        }
+        .print-quote-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          border-bottom: 2px solid #111827;
+          padding-bottom: 4mm;
+          margin-bottom: 8mm;
+        }
+        .print-quote-table {
+          width: 100%;
+          border-collapse: collapse;
+          page-break-inside: auto;
+        }
+        .print-quote-table th {
+          text-align: left;
+          padding: 3mm 2mm;
+          border-bottom: 1px solid #111827;
+          font-weight: 600;
+          color: #111827;
+        }
+        .print-quote-table td {
+          padding: 3mm 2mm;
+          border-bottom: 1px solid #e5e7eb;
+          vertical-align: top;
+        }
+        .print-quote-table tbody tr {
+          page-break-inside: avoid;
+        }
+        .print-quote-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .print-quote-summary {
+          margin-top: auto;
+          padding-top: 8mm;
+          border-top: 2px solid #111827;
+          display: flex;
+          justify-content: flex-end;
+        }
+        .print-quote-summary-box {
+            width: 50%;
+        }
+        .print-quote-footer {
+          text-align: center;
+          margin-top: 8mm;
+          font-size: 8pt;
+          color: #6b7280;
+        }
+        .print-quote-table .text-center { text-align: center; }
+        .print-quote-table .text-right { text-align: right; }
+      }
+
     </style>
 <script type="importmap">
 {
@@ -45,14 +175,12 @@
   }
 }
 </script>
-    <!-- ADDED: Babel Standalone for JSX transpilation in the browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <link rel="stylesheet" href="/index.css">
 </head>
 <body class="antialiased">
     <div id="root"></div>
-    <!-- CHANGED: script type to "text/babel" to be processed by Babel -->
-    <script type="text/babel" data-type="module" src="./index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
+    <div id="printable-collection" style="display: none;"></div>
+    <div id="printable-quote" style="display: none;"></div>
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>
